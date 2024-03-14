@@ -1,4 +1,5 @@
 
+--create table director
 
 CREATE TABLE director
 director_id SERIAL PRIMARY KEY,
@@ -11,7 +12,7 @@ address_id INT REFERENCES address(address_id))
 select * from director
 
 step 2 
-ALTER TABLE steps
+--ALTER TABLE steps
 
 1. director_account_name to VARCHAR(30)
 2. drop the default on last_name
@@ -58,7 +59,7 @@ song_id SERIAL PRIMARY KEY,
 song _name VARCHAR(30) NOT NULL,
 genre VARCHAR(30) DEFAULT 'Not defined',
 price numeric(4,2) CHECK(price>=1.99),
-release_date DATE CONSTRAINT date_check CHECk(release_date BETWEEN '01-01-1950'  AND 'CURRENT_DATE))
+release_date DATE CONSTRAINT date_check CHECk(release_date BETWEEN '01-01-1950'  AND 'CURRENT_DATE'))
 
 ---SELECT * FROM SONGS
 
@@ -67,7 +68,7 @@ VALUES( 'SQL song', 0.99,'01-07-2022')
 
 
 ---this will give constrain error
-modify the constrain '
+modify the constrain 
 
 ALTER table songs 
 DROP constraint songs_price_check;
