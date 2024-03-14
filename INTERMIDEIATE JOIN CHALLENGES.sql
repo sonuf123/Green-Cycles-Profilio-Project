@@ -1,4 +1,4 @@
-JOINS 
+---JOINS 
 Challenge 1 INNER JOIN 
 The airline company wants to understand in which category they sell most tickets.
 How many people choose seats in the category
