@@ -1,0 +1,122 @@
+--BASIC filtering
+
+Challenge 1 WHERE OPERATORS
+
+--How many payment were made by the customer with customer_id = 100? Write a SQL query to get the answers Result
+--What is the last name of our customer withfirst name 'ERICA'?
+
+SELECT
+COUNT(*) FROM payment
+where customer_id = 100 ;
+
+select 
+first_name,last_name 
+from customer
+WHERE first_name ='ERICA';
+
+
+------------------------------------------------------------------------
+Challenge 2 WHERE OPERATORS
+--The inventory manager asks you how many rentals have not been returned yet (return_date is null).Write a SQL query to get the answers! 
+
+Result
+
+
+
+select count(*) from rental
+where return_date is null
+
+
+--The sales manager asks you for a list of all the payment_ids with an amount less than or equal to $2.Include payment_id and the amount.
+
+
+select payment_id ,amount
+from payment
+where amount <= 2
+order by amount desc
+
+
+
+
+
+
+
+---------------------------------------------------------------
+challenge 3  WITH AND/OR
+----The support manager asks you about a list of all the payment of the customer 322, 346 and 354 where the amount is either less than $2 or greater than $10.
+It should be ordered by the customer first (ascending) and then
+as second condition order by amount in a descending order.
+
+sol 1 
+select * from payment
+where (customer_id = 322 or customer_id = 346 OR customer_id = 354)
+AND 
+(amount < 2 OR amount > 10)
+ORDER BY customer_id ASC,amount DESC
+
+
+sol2
+
+select * from payment
+where customer_id IN (322,346,354)
+AND ( amount < 2 OR amount > 10 )
+ORDER BY customer_id ASC,amount DESC
+
+
+
+-----------------------------------------------------------------------
+Challenge 4
+
+--There have been some faulty payments and you need to help to find out how many payments have been affected ?
+How many payments have been made on
+January 26th and 27th
+2020 ( including entire 27th ) with an amount between 1.99 and 3.99 ?
+
+
+select count(*) from payment
+where amount between  1.99 AND 3.99
+AND payment_date  between '2020-01-26'  AND '2020-01-28'
+----------------------------------------------
+CHALLENGE 5
+
+--There have been 6 complaints of customers about their payments.Write a SQL query to get a list of the concerned payments! Result
+--It should be 7 payments!
+customer_id: 12,25,67,93,124,234
+The concerned payments are all the payments of these
+customers with amounts 4.99, 7.99 and 9.99 in January 2020.
+
+
+
+SELECT * FROM PAYMENT
+WHERE customer_id IN (12,25,67,93,124,234)
+AND amount IN (4.99,7.99,9.99)
+AND payment_date between '2020-01-01' and '2020-02-01'
+ORDER BY amount DESC
+
+------------------------------------------
+Challenge 6 LIKE
+
+-----How many customers are there with a first name that is
+--3 letters long and either an 'X' or a 'Y' as the last letter
+--in the last name?
+
+
+
+select * from customer
+where first_name  LIKE '___'
+AND last_name LIKE '%X'
+OR
+last_name LIKE '%Y'
+
+-----------------------
+COMMENT AND ALIAS
+-- AND 
+ /*  */
+
+
+------------------------------------------
+
+Challenge 7 -ss
+challenge 8
+challenge 9
+
