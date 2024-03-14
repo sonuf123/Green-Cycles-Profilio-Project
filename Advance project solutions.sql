@@ -7,7 +7,7 @@ Topic: DISTINCT
 
 Task: Create a list of all the different (distinct) replacement costs of the films.
 
-Question: What's the lowest replacement cost?
+/*Question: What's the lowest replacement cost?*/
 
 
 
@@ -99,7 +99,7 @@ GROUP BY name
 ORDER BY 2 DESC
 
 ----------------------------------------------------------------------------------------------------------------------
-Question 5:
+/*Question 5:
 
 Level: Moderate
 
@@ -107,7 +107,7 @@ Topic: JOIN & GROUP BY
 
 Task: Create an overview of the actors' first and last names and in how many movies they appear in.
 
-Question: Which actor is part of most movies??
+Question: Which actor is part of most movies??*/
 
 Answer: Susan Davis with 54 movies
 
