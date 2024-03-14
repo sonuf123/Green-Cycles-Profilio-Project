@@ -74,12 +74,12 @@ FROM customer
 --------------------------------------------------------------
 You need to analyze the payments and find out the following:
 
-What's the month with the highest total payment amount?
+/*What's the month with the highest total payment amount?
 
 What's the day of week with the highest total payment amount?
 (0 is
 
-What's the highest amount one customer has spent in a week?
+What's the highest amount one customer has spent in a week?*/
 
 SELECT
 customer_id,
@@ -89,13 +89,13 @@ FROM payment
 GROUP BY week, customer_id
 ORDER BY total_payment_amount DESC
 ------------------------------------
-You need to sum payments and group in the following formats:
+/*You need to sum payments and group in the following formats:
 
 1.day   Fri, 24/01/2020
 
 2 746.62 May, 2020
 
-3 Thu, 02:44
+3 Thu, 02:44   */
 
 SELECT
 SUM (amount) as total_payment,
