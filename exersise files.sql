@@ -32,13 +32,13 @@ rental_date DESC
 LIMIT
 1
 --------------------------------------------
-*How* many films does the company have?
+How many films does the company have?
 SELECT
 COUNT
 FROM
 film
 -------------------
-*How* many distinct last names of the
+How many distinct last names of the
 customers are there?
 
 SELECT
