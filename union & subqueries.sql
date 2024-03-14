@@ -1,4 +1,4 @@
-union & subqueries
+---union & subqueries
 
 
 Select all of the films where the length is longer than the average of all films.
@@ -131,12 +131,11 @@ WHERE f1.rating=f3.rating)
 
 
 -----------------------------------------------------------------------------
-Show only those payments with the highest payment for each customer's first
+/*Show only those payments with the highest payment for each customer's first
 name including the payment_id of that payment.
 How would you solve it if you would not need to see the payment_id?
-Result
+Result*/
 
---
 --corellated subquery mit join
 --show payments for each cust inc.
 
