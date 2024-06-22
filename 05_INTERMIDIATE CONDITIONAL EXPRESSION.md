@@ -1,15 +1,16 @@
-INTERMIDIATE CONDITIONAL EXPRESSION
+# INTERMIDIATE CONDITIONAL EXPRESSION
 
 
-Your manager is thinking about increasing the prices for films
+**Your manager is thinking about increasing the prices for films
 that are more expensive to replace.
 For that reason, you should create a list of the films including the
 relation of rental rate / replacement cost where the rental rate
 is less than 4% of the replacement cost.
 Create a list of that film_ids together with the percentage rounded
-to 2 decimal places. For example 3.54 (=
+to 2 decimal places. For example 3.54 (=**
 
 
+```sql
 SELECT
 film_id,
 ROUND (rental_rate / replacement_cost*100,2) as percentage
@@ -17,8 +18,9 @@ FROM film
 WHERE ROUND (rental_rate / replacement_cost*100,2)< 4
 ORDER BY 2 ASC
 
+```
 -------------------
-You need to find out how many tickets you have sold in the
+**You need to find out how many tickets you have sold in the
 following categories:
 •
 Low price ticket: total_amount < 20,000
@@ -26,8 +28,9 @@ Low price ticket: total_amount < 20,000
 Mid price ticket: total_amount between 20,000 and 150,000
 •
 High price ticket: total_amount >= 150,000
-How many high price tickets has the company sold?
+How many high price tickets has the company sold?**
 
+```sql
 SELECT ticket_price, count(1)
 FROM(SELECT
 book_ref,
@@ -39,9 +42,10 @@ END as ticket_price
 FROM bookings
 ) a
 GROUP BY ticket_price;
+```
 
 ------------------
-You need to find out how many flights have departed in the
+**You need to find out how many flights have departed in the
 following seasons:
 •
 Winter: December, January, Februar
@@ -50,9 +54,11 @@ Spring: March, April, May
 •
 Summer: June, July, August
 •
-Fall: September, October, November
-Result
+Fall: September, October, November**
 
+`Result`
+
+```sql
 SELECT 
 COUNT(*) as flights,
 CASE
@@ -63,8 +69,9 @@ ELSE 'Fall'
 END as season
 FROM flights
 GROUP BY season
+```
 -------------------------
-You want to create a tier list in the following way:
+**You want to create a tier list in the following way:
 1.
 Rating is 'PG' or 'PG 13' or length is more then 210 min:
 'Great rating or long (tier
@@ -78,9 +85,10 @@ Description contains 'Drama' and length is not more than 90min:
 Rental_rate less than $1:
 'Very cheap (tier
 If one movie can be in multiple categories it gets the higher tier assigned.
-How can you filter to only those movies that appear in one of these 4 tiers?
+How can you filter to only those movies that appear in one of these 4 tiers?**
 
 
+```sql
 SELECT
 title,
 CASE
@@ -97,13 +105,16 @@ WHEN description LIKE '%Drama%' AND length>90 THEN 'Long drama (tier 2)'
 WHEN description LIKE '%Drama%' THEN 'Short drama (tier 3)'
 WHEN rental_rate<1 THEN 'Very cheap (tier 4)'
 END is not null
+```
 -------------
-CHALLENGE AFTER COALESCE AND CAST
+`CHALLENGE AFTER COALESCE AND CAST`
 
+```sql
 SELECT
 rental_date,
 COALESCE (CAST (return_date AS VARCHAR, 'not returned')
 FROM rental
 ORDER BY rental_date DESC
+```
 
 
