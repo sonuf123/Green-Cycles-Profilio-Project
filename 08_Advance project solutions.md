@@ -1,41 +1,45 @@
-Challenges
-Question 1:
+## Challenges
 
-Level: Simple
+`Question 1:`
 
-Topic: DISTINCT
+`Level: Simple`
 
-Task: Create a list of all the different (distinct) replacement costs of the films.
+`Topic: DISTINCT`
 
-/*Question: What's the lowest replacement cost?*/
+**Task: Create a list of all the different (distinct) replacement costs of the films.
+
+/*Question: What's the lowest replacement cost?*/*
 
 
 
+```sql
 SELECT DISTINCT replacement_cost 
 FROM film
 ORDER BY 1
+```
 
 --------------------------------------------------------------------------------------------------
 
 
-Question 2:
+`Question 2:`
 
-Level: Moderate
+**Level: Moderate**
 
-Topic: CASE + GROUP BY
+`Topic: CASE + GROUP BY`
 
-Task: Write a query that gives an overview of how many films have replacements costs in the following cost ranges
+**Task: Write a query that gives an overview of how many films have replacements costs in the following cost ranges
 
-low: 9.99 - 19.99
+**low: 9.99 - 19.99**
 
-medium: 20.00 - 24.99
+**medium: 20.00 - 24.99**
 
-high: 25.00 - 29.99
+**high: 25.00 - 29.99**
 
-Question: How many films have a replacement cost in the "low" group?
+**Question: How many films have a replacement cost in the "low" group?**
 
 
 
+```sql
 SELECT 
 CASE 
 WHEN replacement_cost BETWEEN 9.99 AND 19.99
@@ -47,19 +51,21 @@ END as cost_range,
 COUNT(*)
 FROM film
 GROUP BY cost_range
+```
 
 
 ----------------------------------------------------------------------------------------------------------------------
-Question 3:
+`Question 3:`
 
-Level: Moderate
+`Level: Moderate`
 
-Topic: JOIN
+`Topic: JOIN`
 
-Task: Create a list of the film titles including their title, length, and category name ordered descendingly by length. Filter the results to only the movies in the category 'Drama' or 'Sports'.
+**Task: Create a list of the film titles including their title, length, and category name ordered descendingly by length. Filter the results to only the movies in the category 'Drama' or 'Sports'.**
 
 Question: In which category is the longest film and how long is it?
 
+```sql
 SELECT 
 title,
 name,
@@ -71,6 +77,7 @@ LEFT JOIN category c
 ON c.category_id=fc.category_id
 WHERE name = 'Sports' OR name = 'Drama'
 ORDER BY length DESC
+```
 
 
 
@@ -78,15 +85,16 @@ ORDER BY length DESC
 
 Question 4:
 
-Level: Moderate
+`Level: Moderate`
 
-Topic: JOIN & GROUP BY
+`Topic: JOIN & GROUP BY`
 
-Task: Create an overview of how many movies (titles) there are in each category (name).
+**Task: Create an overview of how many movies (titles) there are in each category (name).**
 
-Question: Which category (name) is the most common among the films?
+**Question: Which category (name) is the most common among the films?**
 
 
+```sql
 SELECT
 name,
 COUNT(title)
@@ -97,21 +105,23 @@ INNER JOIN category c
 ON c.category_id=fc.category_id
 GROUP BY name
 ORDER BY 2 DESC
+```
 
 ----------------------------------------------------------------------------------------------------------------------
 /*Question 5:
 
-Level: Moderate
+`Level: Moderate`
 
-Topic: JOIN & GROUP BY
+`Topic: JOIN & GROUP BY`
 
-Task: Create an overview of the actors' first and last names and in how many movies they appear in.
+**Task: Create an overview of the actors' first and last names and in how many movies they appear in.**
 
-Question: Which actor is part of most movies??*/
+**Question: Which actor is part of most movies??**
 
 Answer: Susan Davis with 54 movies
 
 
+```sql
 SELECT 
 first_name,
 last_name,
@@ -123,36 +133,40 @@ LEFT JOIN film f
 ON fa.film_id=f.film_id
 GROUP BY first_name, last_name
 ORDER BY COUNT(*) DESC
+```
 
 ----------------------------------------------------------------------------------------------------------------------
 
-Question 6:
+**Question 6:**
 
-Level: Moderate
+`Level: Moderate`
 
-Topic: LEFT JOIN & FILTERING
+`Topic: LEFT JOIN & FILTERING`
 
-Task: Create an overview of the addresses that are not associated to any customer.
+**Task: Create an overview of the addresses that are not associated to any customer.**
 
-Question: How many addresses are that?
+**Question: How many addresses are that?**
 
+```sql
 SELECT * FROM address a
 LEFT JOIN customer c
 ON c.address_id = a.address_id
 WHERE c.first_name is null
+```
 
 ----------------------------------------------------------------------------------------------------------------------
 
-Question 7:
+**Question 7:**
 
-Level: Moderate
+`Level: Moderate`
 
-Topic: JOIN & GROUP BY
+`Topic: JOIN & GROUP BY`
 
-Task: Create the overview of the sales  to determine the from which city (we are interested in the city in which the customer lives, not where the store is) most sales occur.
+**Task: Create the overview of the sales  to determine the from which city (we are interested in the city in which the customer lives, not where the store is) most sales occur.**
 
-Question: What city is that and how much is the amount?
+**Question: What city is that and how much is the amount?**
 
+```sql
 SELECT 
 city,
 SUM(amount)
@@ -165,23 +179,25 @@ LEFT JOIN city ci
 ON ci.city_id=a.city_id
 GROUP BY city
 ORDER BY city DESC
+```
 
 
 
 ----------------------------------------------------------------------------------------------------------------------
-Question 8:
+**Question 8:**
 
-Level: Moderate to difficult
+`Level: Moderate to difficult`
 
-Topic: JOIN & GROUP BY
+`Topic: JOIN & GROUP BY`
 
-Task: Create an overview of the revenue (sum of amount) grouped by a column in the format "country, city".
+**Task: Create an overview of the revenue (sum of amount) grouped by a column in the format "country, city"**.
 
-Question: Which country, city has the least sales?
+**Question: Which country, city has the least sales?**
 
 Answer: United States, Tallahassee with a total amount of 50.85.
 
 
+```sql
 SELECT 
 country ||', ' ||city,
 SUM(amount)
@@ -196,20 +212,22 @@ LEFT JOIN country co
 ON co.country_id=ci.country_id
 GROUP BY country ||', ' ||city
 ORDER BY 2 ASC
+```
 ----------------------------------------------------------------------------------------------------------------------
 
-Question 9:
+**Question 9:**
 
-Level: Difficult
+`Level: Difficult`
 
-Topic: Uncorrelated subquery
+`Topic: Uncorrelated subquery`
 
-Task: Create a list with the average of the sales amount each staff_id has per customer.
+**Task: Create a list with the average of the sales amount each staff_id has per customer.
 
 Question: Which staff_id makes on average more revenue per customer?
 
-Answer: staff_id 2 with an average revenue of 56.64 per customer.
+Answer: staff_id 2 with an average revenue of 56.64 per customer.**
 
+```sql
 SELECT 
 staff_id,
 ROUND(AVG(total),2) as avg_amount 
@@ -218,19 +236,21 @@ SELECT SUM(amount) as total,customer_id,staff_id
 FROM payment
 GROUP BY customer_id, staff_id) a
 GROUP BY staff_id
+```
 ----------------------------------------------------------------------------------------------------------------------
-Question 10:
+**Question 10:**
 
-Level: Difficult to very difficult
+`Level: Difficult to very difficult`
 
-Topic: EXTRACT + Uncorrelated subquery
+`Topic: EXTRACT + Uncorrelated subquery`
 
-Task: Create a query that shows average daily revenue of all Sundays.
+**Task: Create a query that shows average daily revenue of all Sundays.**
 
-Question: What is the daily average revenue of all Sundays?
+**Question: What is the daily average revenue of all Sundays?**
 
 Answer: 1410.65
 
+```sql
 SELECT 
 AVG(total)
 FROM 
@@ -241,20 +261,22 @@ FROM
 	 FROM payment
 	 WHERE EXTRACT(dow from payment_date)=0
 	 GROUP BY DATE(payment_date),weekday) daily
+```
 
 ----------------------------------------------------------------------------------------------------------------------
 
-Question 11:
+**Question 11:**
 
-Level: Difficult to very difficult
+`Level: Difficult to very difficult`
 
-Topic: Correlated subquery
+`Topic: Correlated subquery`
 
-Task: Create a list of movies - with their length and their replacement cost - that are longer than the average length in each replacement cost group.
+**Task: Create a list of movies - with their length and their replacement cost - that are longer than the average length in each replacement cost group.**
 
-Question: Which two movies are the shortest on that list and how long are they?
+**Question: Which two movies are the shortest on that list and how long are they?**
 
 Answer: CELEBRITY HORN and SEATTLE EXPECTATIONS with 110 minutes.
+```sql
 
 SELECT 
 title,
@@ -263,24 +285,26 @@ FROM film f1
 WHERE length > (SELECT AVG(length) FROM film f2
 			   WHERE f1.replacement_cost=f2.replacement_cost)
 ORDER BY length ASC
+```
 ----------------------------------------------------------------------------------------------------------------------
-Question 12:
+**Question 12:**
 
-Level: Very difficult
+`Level: Very difficult`
 
-Topic: Uncorrelated subquery
+`Topic: Uncorrelated subquery`
 
-Task: Create a list that shows the "average customer lifetime value" grouped by the different districts.
+**Task: Create a list that shows the "average customer lifetime value" grouped by the different districts.**
 
-Example:
+**Example:
 If there are two customers in "District 1" where one customer has a total (lifetime) spent of $1000 and the second customer has a total spent of $2000 then the "average customer lifetime spent" in this district is $1500.
-
-So, first, you need to calculate the total per customer and then the average of these totals per district.
-
-Question: Which district has the highest average customer lifetime value?
+**
+**So, first, you need to calculate the total per customer and then the average of these totals per district.
+**
+**Question: Which district has the highest average customer lifetime value?**
 
 Answer: Saint-Denis with an average customer lifetime value of 216.54.
 
+```sql
 SELECT
 district,
 ROUND(AVG(total),2) avg_customer_spent
@@ -297,19 +321,21 @@ ON c.address_id=a.address_id
 GROUP BY district, c.customer_id) sub
 GROUP BY district
 ORDER BY 2 DESC
+```
 ----------------------------------------------------------------------------------------------------------------------
-Question 13:
+**Question 13:**
 
-Level: Very difficult
+`Level: Very difficult`
 
-Topic: Correlated query
+`Topic: Correlated query`
 
-Task: Create a list that shows all payments including the payment_id, amount, and the film category (name) plus the total amount that was made in this category. Order the results ascendingly by the category (name) and as second order criterion by the payment_id ascendingly.
+**Task: Create a list that shows all payments including the payment_id, amount, and the film category (name) plus the total amount that was made in this category. Order the results ascendingly by the category (name) and as second order criterion by the payment_id ascendingly.**
 
-Question: What is the total revenue of the category 'Action' and what is the lowest payment_id in that category 'Action'?
+**Question: What is the total revenue of the category 'Action' and what is the lowest payment_id in that category 'Action'?**
 
 Answer: Total revenue in the category 'Action' is 4375.85 and the lowest payment_id in that category is 16055.
 
+```sql
 SELECT
 title,
 amount,
@@ -339,20 +365,22 @@ ON fc.film_id=f.film_id
 LEFT JOIN category c
 ON c.category_id=fc.category_id
 ORDER BY name
-----------------------------------------------------------------------------------------------------------------------
-Bonus question 14:
+```
+------------------------------------------------------------------------------------------------
+**Bonus question 14:**
 
-Level: Extremely difficult
+`Level: Extremely difficult`
 
-Topic: Correlated and uncorrelated subqueries (nested)
+`Topic: Correlated and uncorrelated subqueries (nested)`
 
-Task: Create a list with the top overall revenue of a film title (sum of amount per title) for each category (name).
+**Task: Create a list with the top overall revenue of a film title (sum of amount per title) for each category (name).**
 
-Question: Which is the top-performing film in the animation category?
+**Question: Which is the top-performing film in the animation category?**
 
 Answer: DOGMA FAMILY with 178.70.
 
 
+```sql
 SELECT
 title,
 name,
@@ -370,11 +398,11 @@ LEFT JOIN category c
 ON c.category_id=fc.category_id
 GROUP BY name,title
 HAVING SUM(amount) =     (SELECT MAX(total)
-			  FROM 
+ FROM 
                                 (SELECT
-			          title,
+       title,
                                   name,
-			          SUM(amount) as total
+      SUM(amount) as total
 			          FROM payment p
 			          LEFT JOIN rental r
 			          ON r.rental_id=p.rental_id
@@ -388,3 +416,5 @@ HAVING SUM(amount) =     (SELECT MAX(total)
 				  ON c1.category_id=fc.category_id
 				  GROUP BY name,title) sub
 			   WHERE c.name=sub.name)
+
+```
